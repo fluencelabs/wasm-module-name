@@ -15,7 +15,7 @@ panic = 'abort'
 name = "wasm-module-name"
 
 [dependencies]
-parity-wasm = { git = "https://github.com/fluencelabs/parity-wasm" }
+parity-wasm = "0.38.0"
 clap = "2.32.0"
 exitfailure = "0.5.1"
 failure = "0.1.5"

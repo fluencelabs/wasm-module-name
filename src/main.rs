@@ -81,7 +81,7 @@ fn main() -> Result<(), ExitFailure> {
 
             let module_name = match name_section {
                 Some(name_section) => {
-                    match name_section.module_name_subsection() {
+                    match name_section.module() {
                         Some(name_section) => name_section.name(),
                         None => no_module_name,
                     }
@@ -103,8 +103,8 @@ fn main() -> Result<(), ExitFailure> {
 
             let new_module_name_subsection = ModuleNameSubsection::new(new_module_name);
             match name_section {
-                Some(mut name_section) =>
-                    *name_section.module_name_subsection_mut() = Some(new_module_name_subsection),
+                Some(name_section) =>
+                    *name_section.module_mut() = Some(new_module_name_subsection),
                 None => {
                     let name_section = NameSection::new(Some(new_module_name_subsection), None, None);
 
