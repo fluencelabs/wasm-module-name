@@ -9,10 +9,10 @@ The utility supports `show` and `set` commands:
 ```bash
 
 ~ $ wasm-module-name show test.wasm
-The module name <no-name>
+The module name is <no-name>
 
 ~ $ wasm-module-name set test.wasm test
 
 ~ $ wasm-module-name show test.wasm
-The module name test
+The module name is test
 ```

@@ -16,12 +16,12 @@
 
 //#![warn(missing_docs)]
 
-// TODO: replace unwrap with more nady error
+// TODO: replace unwrap with more handy error
 // TODO: add some docs
 
 use parity_wasm;
 use parity_wasm::elements::{NameSection, ModuleNameSubsection, Serialize};
-use clap::{App, Arg, SubCommand};
+use clap::{App, AppSettings, Arg, SubCommand};
 use exitfailure::ExitFailure;
 use failure::err_msg;
 
@@ -66,6 +66,7 @@ fn main() -> Result<(), ExitFailure> {
         .version(VERSION)
         .author(AUTHORS)
         .about(DESCRIPTION)
+        .setting(AppSettings::ArgRequiredElseHelp)
         .subcommand(show_module_name_subcommand())
         .subcommand(set_module_name_subcommand());
 
@@ -89,7 +90,7 @@ fn main() -> Result<(), ExitFailure> {
                 None => no_module_name,
             };
 
-            println!("The module name {}", module_name);
+            println!("The module name is {}", module_name);
             Ok(())
         },
 
