@@ -16,7 +16,6 @@
 
 //#![warn(missing_docs)]
 
-// TODO: replace unwrap with more handy error
 // TODO: add some docs
 
 use parity_wasm;
@@ -74,8 +73,8 @@ fn main() -> Result<(), ExitFailure> {
         ("show", Some(arg)) => {
             let module_path = arg.value_of(MODULE_PATH).unwrap();
 
-            let module = parity_wasm::deserialize_file(module_path).unwrap();
-            let module = module.parse_names().unwrap();
+            let module = parity_wasm::deserialize_file(module_path).expect("Error while deserializing file file");
+            let module = module.parse_names().expect("Error while parsing names");
             let name_section = module.names_section();
 
             let no_module_name: &str = "<no-name>";
@@ -98,8 +97,8 @@ fn main() -> Result<(), ExitFailure> {
             let module_path = args.value_of(MODULE_PATH).unwrap();
             let new_module_name = args.value_of(NEW_MODULE_NAME).unwrap();
 
-            let module = parity_wasm::deserialize_file(module_path).unwrap();
-            let mut module = module.parse_names().unwrap();
+            let module = parity_wasm::deserialize_file(module_path).expect("Error while deserializing file file");
+            let mut module = module.parse_names().expect("Error while parsing names");
             let name_section = module.names_section_mut();
 
             let new_module_name_subsection = ModuleNameSubsection::new(new_module_name);
@@ -110,13 +109,13 @@ fn main() -> Result<(), ExitFailure> {
                     let name_section = NameSection::new(Some(new_module_name_subsection), None, None);
 
                     let mut buffer = vec![];
-                    name_section.serialize(&mut buffer).unwrap();
+                    name_section.serialize(&mut buffer).expect("Error while serializing name section");
 
                     module.set_custom_section("name", buffer);
                 }
             };
 
-            parity_wasm::serialize_to_file(module_path, module).unwrap();
+            parity_wasm::serialize_to_file(module_path, module).expect("Error while serializing file");
             Ok(())
         },
 
