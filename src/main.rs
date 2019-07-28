@@ -73,7 +73,7 @@ fn main() -> Result<(), ExitFailure> {
         ("show", Some(arg)) => {
             let module_path = arg.value_of(MODULE_PATH).unwrap();
 
-            let module = parity_wasm::deserialize_file(module_path).expect("Error while deserializing file file");
+            let module = parity_wasm::deserialize_file(module_path).expect("Error while deserializing file");
             let module = module.parse_names().expect("Error while parsing names");
             let name_section = module.names_section();
 
@@ -97,7 +97,7 @@ fn main() -> Result<(), ExitFailure> {
             let module_path = args.value_of(MODULE_PATH).unwrap();
             let new_module_name = args.value_of(NEW_MODULE_NAME).unwrap();
 
-            let module = parity_wasm::deserialize_file(module_path).expect("Error while deserializing file file");
+            let module = parity_wasm::deserialize_file(module_path).expect("Error while deserializing file");
             let mut module = module.parse_names().expect("Error while parsing names");
             let name_section = module.names_section_mut();
 
